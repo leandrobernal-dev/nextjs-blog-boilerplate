@@ -1,28 +1,18 @@
-// TODO: GET BLOGS FROM DATABASE AND RETURN HERE
-
 import { SITE } from "@/config/config";
+import Post from "@/models/Post";
 
-export default function sitemap() {
-  let routes = ["", "/posts", "/search"].map((route) => ({
+export default async function sitemap() {
+  let posts = await Post.find();
+
+  let blogPosts = posts.map((post) => ({
+    url: `${SITE.website}${post.slug}`,
+    lastModified: post.createdAt,
+  }));
+
+  let routes = ["", "posts", "search", "about"].map((route) => ({
     url: `${SITE.website}${route}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
-  return [...routes];
+  return [...routes, ...blogPosts];
 }
-
-// import { getBlogPosts } from 'app/db/blog';
-
-// export default async function sitemap() {
-//   let blogs = getBlogPosts().map((post) => ({
-//     url: `https://leerob.io/blog/${post.slug}`,
-//     lastModified: post.metadata.publishedAt,
-//   }));
-
-//   let routes = ['', '/blog', '/guestbook', '/uses', '/work'].map((route) => ({
-//     url: `https://leerob.io${route}`,
-//     lastModified: new Date().toISOString().split('T')[0],
-//   }));
-
-//   return [...routes, ...blogs];
-// }
