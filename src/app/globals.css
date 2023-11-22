@@ -2,26 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Width, color, and background of the scrollbar track */
+::-webkit-scrollbar {
+  width: 10px; /* Adjust width as needed */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Handle (thumb) of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 139, 139, 0.5); /* Color of the scrollbar thumb */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(139, 139, 139); /* Color of the scrollbar thumb */
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Track (background area) of the scrollbar */
+::-webkit-scrollbar-track {
+  background: transparent; /* Color of the scrollbar track */
+}
+
+/* Corner area where vertical and horizontal scrollbars meet */
+::-webkit-scrollbar-corner {
+  background: transparent; /* Color of the scrollbar corner */
 }
