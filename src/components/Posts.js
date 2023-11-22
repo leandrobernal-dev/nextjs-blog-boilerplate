@@ -60,7 +60,7 @@ export default async function Posts({ category, searchQuery }) {
     return (
       <>
         <p className="py-4">
-          Found {posts.length} results for '{searchQuery}'{" "}
+          Found {uniquePosts.length} results for '{searchQuery}'{" "}
         </p>
 
         <PostElements posts={uniquePosts} />
