@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import { htmlToMarkdown } from "@/app/admin/create/parser";
 import Editor from "@/components/Editor";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import NoSSR from "@/utils/NoSSR";
 
 export default function CreatePostPage() {
   const [value, setValue] = useState("");
@@ -67,7 +69,9 @@ export default function CreatePostPage() {
           className="border-b border-b-white bg-transparent text-sm outline-none"
         />
       </p>
-      <Editor value={value} setValue={setValue} />
+      <NoSSR>
+        <Editor value={value} setValue={setValue} />
+      </NoSSR>
       <button className="rounded-md bg-white p-4 py-2 font-bold text-black">
         Save
       </button>

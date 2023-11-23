@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { SITE } from "@/config/config";
 
 export async function generateMetadata({ params, searchParams }, parent) {

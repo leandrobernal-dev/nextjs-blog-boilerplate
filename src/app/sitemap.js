@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { SITE } from "@/config/config";
 import dbConnect from "@/db/database";
 import Post from "@/models/Post";
