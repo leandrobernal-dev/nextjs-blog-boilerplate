@@ -1,16 +1,31 @@
 export const dynamic = "force-dynamic";
 
 import { SITE } from "@/config/config";
-import dbConnect from "@/db/database";
-import Post from "@/models/Post";
+import axios from "axios";
 
 export default async function sitemap() {
-  await dbConnect();
-  let posts = await Post.find();
+  const query = {
+    query: `
+            {
+              posts {
+                nodes {
+                  id
+                  slug
+                  date
+                }
+              }
+            }
+        `,
+  };
+  const posts = await axios
+    .post(process.env.GRAPHQL_URI, query)
+    .then(({ data }) => {
+      return data.data.posts.nodes;
+    });
 
   let blogPosts = posts.map((post) => ({
     url: `${SITE.website}${post.slug}`,
-    lastModified: post.createdAt,
+    lastModified: new Date(post.date).toISOString().split("T")[0],
   }));
 
   let routes = ["", "posts", "search", "about"].map((route) => ({

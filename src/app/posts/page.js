@@ -1,6 +1,10 @@
 import Posts from "@/components/Posts";
+import { headers } from "next/headers";
 
-export default function PostsPage() {
+export default function PostsPage(req) {
+  const headerList = headers();
+  const ip = headerList.get("x-forwarded-for");
+  console.log(ip);
   return (
     <div>
       <h1 className="pb-4 text-3xl font-bold">Posts</h1>

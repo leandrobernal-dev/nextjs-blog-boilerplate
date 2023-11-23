@@ -17,7 +17,7 @@ export default function Nav() {
     <header>
       <div className="relative my-8 border-b border-orange-500/30 pb-8 sm:flex sm:justify-between">
         <span className="text-2xl">
-          <a href="/">{SITE.title}</a>
+          <Link href="/">{SITE.title}</Link>
         </span>
 
         <nav className="flex justify-center">
