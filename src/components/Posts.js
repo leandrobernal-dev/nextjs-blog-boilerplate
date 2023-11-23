@@ -9,7 +9,7 @@ const PostElements = ({ posts }) => {
   return (
     <ul className="flex flex-col gap-8">
       {posts.map((post) => (
-        <li className="flex flex-col gap-2" key={"featured" + post.title}>
+        <li className="flex flex-col gap-2" key={"featured" + post.id}>
           <Link href={`/posts/${post.slug}`}>
             <h2 className="text-xl text-orange-500">{post.title}</h2>
           </Link>
