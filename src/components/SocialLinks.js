@@ -8,6 +8,7 @@ export default function SocialLinks() {
         return (
           <Link
             target="_blank"
+            className="hover:text-orange-500"
             aria-label={link.name}
             key={link.name}
             href={link.href}
