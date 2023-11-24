@@ -1,4 +1,5 @@
 import { SITE } from "@/config/config";
+import axios from "axios";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   return {
@@ -6,30 +7,41 @@ export async function generateMetadata({ params, searchParams }, parent) {
   };
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const query = {
+    query: `
+          {
+            post(id: "/about", idType: SLUG) {
+              title
+              content
+              featuredImage {
+                node {
+                  mediaItemUrl
+                  altText
+                }
+              }
+            }
+          }
+        `,
+  };
+  const post = await axios
+    .post(process.env.GRAPHQL_URI, query)
+    .then(({ data }) => {
+      return data.data.post;
+    });
+
   return (
     <article>
-      <h1 className="pb-8 text-2xl">About</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis
-        repellat ipsam veritatis omnis sapiente porro nihil labore eaque
-        molestiae recusandae natus esse ipsum, iusto, minus nisi nulla
-        laudantium vel reprehenderit? Corporis iure animi, earum molestiae
-        placeat, perferendis dolore quis nulla magnam in doloremque. Vero
-        commodi vel voluptatem voluptas dolor nam architecto veritatis ipsum
-        nobis nihil tenetur, eos iusto aliquam laborum quisquam enim a corporis?
-        Amet architecto veritatis distinctio! Neque cum dignissimos itaque vero
-        a officia, veniam hic quibusdam magnam voluptatibus quam reprehenderit
-        nemo aliquam esse, amet necessitatibus. Nemo maxime placeat dolores,
-        sequi, laboriosam sit repellat rerum perspiciatis fugiat, numquam quos?
-      </p>
-      <br />
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti omnis
-        tenetur pariatur? Nemo quaerat est dolores saepe, exercitationem, itaque
-        necessitatibus id ad quas suscipit, nihil voluptas quia ex? Provident
-        facilis distinctio quis!
-      </p>
+      <h1
+        className="mb-8 text-2xl font-black"
+        dangerouslySetInnerHTML={{ __html: post.title }}
+      ></h1>
+      <img src={post.featuredImage.node.mediaItemUrl} alt="" />
+
+      <div
+        className=" w-full"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      ></div>
     </article>
   );
 }

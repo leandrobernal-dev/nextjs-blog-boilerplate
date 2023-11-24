@@ -1,6 +1,7 @@
 "use client";
 
 const { SOCIALS } = require("@/config/config");
+import SocialLinks from "@/components/SocialLinks";
 import Link from "next/link";
 
 export default function Footer() {
@@ -9,13 +10,7 @@ export default function Footer() {
       <p>Copyright © 2023 All rights reserved.</p>
 
       <span className="flex justify-center gap-2 hover:text-orange-500">
-        {SOCIALS.map((link) => {
-          return (
-            <Link target="_blank" key={link.href} href={link.href}>
-              {link.icon}
-            </Link>
-          );
-        })}
+        <SocialLinks />
       </span>
     </footer>
   );

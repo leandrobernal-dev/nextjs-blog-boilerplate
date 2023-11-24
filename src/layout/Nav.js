@@ -22,9 +22,11 @@ export default function Nav() {
 
         <nav className="flex justify-center">
           <button
+            aria-label="Menu"
             className="absolute right-0 top-0 sm:hidden"
             onClick={() => setOpen((pre) => !pre)}
           >
+            <span className="hidden">Menu</span>
             {open ? <X /> : <Menu />}
           </button>
 

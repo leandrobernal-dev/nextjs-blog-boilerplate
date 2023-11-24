@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SOCIALS } from "@/config/config";
 
 import Posts from "@/components/Posts";
+import SocialLinks from "@/components/SocialLinks";
 
 export default function Home() {
   return (
@@ -30,13 +31,7 @@ export default function Home() {
             <p>
               <span>Social Links:</span>
               <span className="flex gap-2 hover:text-orange-500">
-                {SOCIALS.map((link) => {
-                  return (
-                    <Link target="_blank" key={link.href} href={link.href}>
-                      {link.icon}
-                    </Link>
-                  );
-                })}
+                <SocialLinks />
               </span>
             </p>
           ) : (

@@ -22,7 +22,10 @@ const PostElements = ({ posts }) => {
               minute: "2-digit",
             })}
           </p>
-          <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+          <img
+            src={post.featuredImage.node.mediaItemUrl}
+            alt={post.featuredImage.node.altText}
+          />
         </li>
       ))}
     </ul>
@@ -37,7 +40,7 @@ export default async function Posts({ category, searchQuery }) {
     query = {
       query: `
             {
-              posts(where: {search: "${searchQuery}"})  {
+              posts(where: {search: "${searchQuery}", categoryName: "posts"})  {
                 nodes {
                   id
                   slug
@@ -71,16 +74,21 @@ export default async function Posts({ category, searchQuery }) {
       query = {
         query: `
               {
-                posts {
+                posts(where: {categoryName: "posts"}) {
                   nodes {
                     id
                     slug
                     title
                     date
-                    content
+                     featuredImage {
+                        node {
+                          mediaItemUrl
+                          altText
+                        }
+                      }
+                    }
                   }
                 }
-              }
             `,
       };
 
@@ -100,7 +108,12 @@ export default async function Posts({ category, searchQuery }) {
                     slug
                     title
                     date
-                    content
+                     featuredImage {
+        node {
+          mediaItemUrl
+          altText
+        }
+      }
                   }
                 }
               }
@@ -117,15 +130,20 @@ export default async function Posts({ category, searchQuery }) {
       query = {
         query: `
               {
-                posts(where: {dateQuery: {month: ${
+                posts(where: {categoryName: "posts", dateQuery: {month: ${
                   new Date().getMonth() + 1
-                }}}) {
+                }, year: ${new Date().getFullYear()}}}) {
                   nodes {
                     id
                     slug
                     title
                     date
-                    content
+                     featuredImage {
+        node {
+          mediaItemUrl
+          altText
+        }
+      }
                   }
                 }
               }
@@ -140,6 +158,5 @@ export default async function Posts({ category, searchQuery }) {
       break;
   }
 
-  console.log(posts);
   return <PostElements posts={posts} />;
 }
