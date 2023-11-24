@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Calendar } from "lucide-react";
-import axios from "axios";
 import { SITE } from "@/config/config";
+import getPosts from "@/utils/getPosts";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const slug = params.slug;
@@ -15,11 +15,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
           }
         `,
   };
-  const post = await axios
-    .post(process.env.GRAPHQL_URI, query)
-    .then(({ data }) => {
-      return data.data.post;
-    });
+  const queryResult = await getPosts(query);
+  const post = queryResult.post;
 
   if (!post) {
     notFound();
@@ -43,16 +40,16 @@ export default async function BlogPage({ params }) {
           }
         `,
   };
-  const post = await axios
-    .post(process.env.GRAPHQL_URI, query)
-    .then(({ data }) => {
-      return data.data.post;
-    });
+
+  const queryResult = await getPosts(query);
+  const post = queryResult.post;
 
   return (
-    <article className="prose prose-zinc dark:prose-invert">
-      <h1>{post.title}</h1>
-      <p className="flex items-center gap-2 text-sm italic text-zinc-400">
+    <>
+      <header>
+        <h1 className="mb-2 text-4xl font-black">{post.title}</h1>
+      </header>
+      <p className="mb-8 flex items-center gap-2 text-sm italic text-zinc-400">
         <Calendar />{" "}
         {new Date(post.date).toLocaleDateString("en-us", {
           month: "long",
@@ -62,8 +59,9 @@ export default async function BlogPage({ params }) {
           minute: "2-digit",
         })}
       </p>
-
-      <section dangerouslySetInnerHTML={{ __html: post.content }}></section>
-    </article>
+      <article className="prose prose-zinc dark:prose-invert">
+        <section dangerouslySetInnerHTML={{ __html: post.content }}></section>
+      </article>
+    </>
   );
 }

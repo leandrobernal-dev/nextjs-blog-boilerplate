@@ -1,4 +1,4 @@
-import axios from "axios";
+import getPosts from "@/utils/getPosts";
 import { unstable_noStore as noStore } from "next/cache";
 
 export default async function About() {
@@ -19,11 +19,8 @@ export default async function About() {
             }
           `,
   };
-  const post = await axios
-    .post(process.env.GRAPHQL_URI, query)
-    .then(({ data }) => {
-      return data.data.post;
-    });
+  const queryResult = await getPosts(query);
+  const post = queryResult.post;
 
   return (
     <>
@@ -31,7 +28,10 @@ export default async function About() {
         className="mb-8 text-2xl font-black"
         dangerouslySetInnerHTML={{ __html: post.title }}
       ></h1>
-      <img src={post.featuredImage.node.mediaItemUrl} alt="" />
+
+      {post.featuredImage && (
+        <img src={post.featuredImage.node.mediaItemUrl} alt="" />
+      )}
 
       <div
         className=" w-full"

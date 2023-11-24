@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { SITE } from "@/config/config";
-import axios from "axios";
+import getPosts from "@/utils/getPosts";
 
 export default async function sitemap() {
   const query = {
@@ -17,11 +17,8 @@ export default async function sitemap() {
             }
         `,
   };
-  const posts = await axios
-    .post(process.env.GRAPHQL_URI, query)
-    .then(({ data }) => {
-      return data.data.posts.nodes;
-    });
+  const postResult = await getPosts(query);
+  const posts = postResult.posts.nodes;
 
   let blogPosts = posts.map((post) => ({
     url: `${SITE.website}${post.slug}`,

@@ -1,9 +1,8 @@
 import { unstable_noStore as noStore } from "next/cache";
 
-import axios from "axios";
-
 import { Calendar } from "lucide-react";
 import Link from "next/link";
+import getPosts from "@/utils/getPosts";
 
 const PostElements = ({ posts }) => {
   return (
@@ -55,11 +54,8 @@ export default async function Posts({ category, searchQuery }) {
             }
           `,
     };
-    posts = await axios
-      .post(process.env.GRAPHQL_URI, query)
-      .then(({ data }) => {
-        return data.data.posts.nodes;
-      });
+    let result = await getPosts(query);
+    posts = result.posts.nodes;
 
     return (
       <>
@@ -89,12 +85,6 @@ export default async function Posts({ category, searchQuery }) {
               }
             `,
       };
-
-      posts = await axios
-        .post(process.env.GRAPHQL_URI, query)
-        .then(({ data }) => {
-          return data.data.posts.nodes;
-        });
       break;
     case "featured":
       query = {
@@ -112,12 +102,6 @@ export default async function Posts({ category, searchQuery }) {
               }
             `,
       };
-
-      posts = await axios
-        .post(process.env.GRAPHQL_URI, query)
-        .then(({ data }) => {
-          return data.data.posts.nodes;
-        });
       break;
     case "recent":
       query = {
@@ -138,13 +122,11 @@ export default async function Posts({ category, searchQuery }) {
             `,
       };
 
-      posts = await axios
-        .post(process.env.GRAPHQL_URI, query)
-        .then(({ data }) => {
-          return data.data.posts.nodes;
-        });
       break;
   }
+
+  let result = await getPosts(query);
+  posts = result.posts.nodes;
 
   return <PostElements posts={posts} />;
 }
