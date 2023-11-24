@@ -1,5 +1,7 @@
+import About from "@/app/about/About";
+import { PostSkeleton } from "@/components/PostSkeleton";
 import { SITE } from "@/config/config";
-import axios from "axios";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   return {
@@ -8,40 +10,11 @@ export async function generateMetadata({ params, searchParams }, parent) {
 }
 
 export default async function AboutPage() {
-  const query = {
-    query: `
-          {
-            post(id: "/about", idType: SLUG) {
-              title
-              content
-              featuredImage {
-                node {
-                  mediaItemUrl
-                  altText
-                }
-              }
-            }
-          }
-        `,
-  };
-  const post = await axios
-    .post(process.env.GRAPHQL_URI, query)
-    .then(({ data }) => {
-      return data.data.post;
-    });
-
   return (
     <article>
-      <h1
-        className="mb-8 text-2xl font-black"
-        dangerouslySetInnerHTML={{ __html: post.title }}
-      ></h1>
-      <img src={post.featuredImage.node.mediaItemUrl} alt="" />
-
-      <div
-        className=" w-full"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      ></div>
+      <Suspense fallback={<PostSkeleton />}>
+        <About />
+      </Suspense>
     </article>
   );
 }

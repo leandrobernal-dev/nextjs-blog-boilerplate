@@ -1,3 +1,5 @@
+import { unstable_noStore as noStore } from "next/cache";
+
 import axios from "axios";
 
 import { Calendar } from "lucide-react";
@@ -33,6 +35,10 @@ const PostElements = ({ posts }) => {
 };
 
 export default async function Posts({ category, searchQuery }) {
+  noStore();
+
+  // await new Promise((resolve) => setTimeout(resolve, 30000)); // Simulate slow data fetching
+
   let posts;
   let query;
 
@@ -46,7 +52,13 @@ export default async function Posts({ category, searchQuery }) {
                   slug
                   title
                   date
-                  content(format: RENDERED)
+                  content
+                  featuredImage {
+                    node {
+                      mediaItemUrl
+                      altText
+                    }
+                  }
                 }
               }
             }

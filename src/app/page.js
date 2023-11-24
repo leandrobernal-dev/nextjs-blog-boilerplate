@@ -1,11 +1,9 @@
-export const dynamic = "force-dynamic";
-
-import Link from "next/link";
-
 import { SOCIALS } from "@/config/config";
 
-import Posts from "@/components/Posts";
 import SocialLinks from "@/components/SocialLinks";
+import { Suspense } from "react";
+import { PostSkeleton } from "@/components/PostSkeleton";
+import Posts from "@/components/Posts";
 
 export default function Home() {
   return (
@@ -44,14 +42,18 @@ export default function Home() {
 
       <section className="py-2">
         <h2 className="pb-6 text-3xl">Featured</h2>
-        <Posts category={"featured"} />
+        <Suspense fallback={<PostSkeleton />}>
+          <Posts category={"featured"} />
+        </Suspense>
       </section>
 
       <hr className="my-8 " />
 
       <section className="py-2">
-        <h2 className="pb-6 text-3xl">Recent Posts</h2>
-        <Posts category={"recent"} />
+        <h2 className="pb-6 text-3xl">Recent</h2>
+        <Suspense fallback={<PostSkeleton />}>
+          <Posts category={"recent"} />
+        </Suspense>
       </section>
     </>
   );

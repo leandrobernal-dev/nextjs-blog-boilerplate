@@ -1,26 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Width, color, and background of the scrollbar track */
-::-webkit-scrollbar {
-  width: 10px; /* Adjust width as needed */
-}
-
-/* Handle (thumb) of the scrollbar */
-::-webkit-scrollbar-thumb {
-  background: rgba(139, 139, 139, 0.5); /* Color of the scrollbar thumb */
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(139, 139, 139); /* Color of the scrollbar thumb */
-}
-
-/* Track (background area) of the scrollbar */
-::-webkit-scrollbar-track {
-  background: transparent; /* Color of the scrollbar track */
-}
-
-/* Corner area where vertical and horizontal scrollbars meet */
-::-webkit-scrollbar-corner {
-  background: transparent; /* Color of the scrollbar corner */
-}
