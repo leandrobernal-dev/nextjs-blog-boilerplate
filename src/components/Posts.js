@@ -24,10 +24,7 @@ const PostElements = ({ posts }) => {
               minute: "2-digit",
             })}
           </p>
-          <img
-            src={post.featuredImage.node.mediaItemUrl}
-            alt={post.featuredImage.node.altText}
-          />
+          <div dangerouslySetInnerHTML={{ __html: post.excerpt }}></div>
         </li>
       ))}
     </ul>
@@ -52,13 +49,7 @@ export default async function Posts({ category, searchQuery }) {
                   slug
                   title
                   date
-                  content
-                  featuredImage {
-                    node {
-                      mediaItemUrl
-                      altText
-                    }
-                  }
+                  excerpt
                 }
               }
             }
@@ -92,15 +83,10 @@ export default async function Posts({ category, searchQuery }) {
                     slug
                     title
                     date
-                     featuredImage {
-                        node {
-                          mediaItemUrl
-                          altText
-                        }
-                      }
-                    }
+                    excerpt
                   }
                 }
+              }
             `,
       };
 
@@ -120,12 +106,7 @@ export default async function Posts({ category, searchQuery }) {
                     slug
                     title
                     date
-                     featuredImage {
-        node {
-          mediaItemUrl
-          altText
-        }
-      }
+                    excerpt
                   }
                 }
               }
@@ -150,12 +131,7 @@ export default async function Posts({ category, searchQuery }) {
                     slug
                     title
                     date
-                     featuredImage {
-        node {
-          mediaItemUrl
-          altText
-        }
-      }
+                    excerpt
                   }
                 }
               }
