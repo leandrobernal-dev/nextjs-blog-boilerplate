@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark">
       <body
         suppressHydrationWarning={true}
-        className={`${ibmMono.className} flex justify-center overflow-y-scroll dark:bg-black dark:text-white`}
+        className={`${ibmMono.className} flex justify-center overflow-y-scroll text-base dark:bg-black dark:text-white`}
       >
         <div className="mx-4 flex min-h-screen w-[95%] max-w-3xl flex-col">
           <ContextProvider>

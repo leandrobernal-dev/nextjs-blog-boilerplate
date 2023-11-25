@@ -59,7 +59,7 @@ export default async function BlogPage({ params }) {
           minute: "2-digit",
         })}
       </p>
-      <article className="prose prose-zinc dark:prose-invert">
+      <article className="prose dark:prose-invert">
         <section dangerouslySetInnerHTML={{ __html: post.content }}></section>
       </article>
     </>
