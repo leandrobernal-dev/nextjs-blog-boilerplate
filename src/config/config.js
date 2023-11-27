@@ -5,6 +5,7 @@ export const SITE = {
   author: "Leandro Bernal",
   description: "Software Development and Tech Blogs",
   title: "leiisme",
+  logo: `<lei/>`,
 };
 
 export const SOCIALS = [

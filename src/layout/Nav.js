@@ -15,9 +15,9 @@ export default function Nav() {
 
   return (
     <header>
-      <div className="relative my-8 border-b border-orange-500/30 pb-8 sm:flex sm:justify-between">
+      <div className="relative my-8 border-b border-orange-500 pb-8 sm:flex sm:justify-between">
         <span className="text-2xl">
-          <Link href="/">{SITE.title}</Link>
+          <Link href="/">{SITE.logo}</Link>
         </span>
 
         <nav className="flex justify-center">
