@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Calendar } from "lucide-react";
 import { SITE } from "@/config/config";
 import getPosts from "@/utils/getPosts";
+import Article from "@/components/Article";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const slug = params.slug;
@@ -11,6 +12,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
             post(id: "/${slug}", idType: SLUG) {
               title
               content
+              excerpt
             }
           }
         `,
@@ -24,6 +26,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
   return {
     title: post.title + " | " + SITE.title,
+    description: String(post.excerpt).replace(/<\/?p>/g, ""),
   };
 }
 
@@ -55,13 +58,10 @@ export default async function BlogPage({ params }) {
           month: "long",
           day: "2-digit",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
         })}
       </p>
-      <article className="prose dark:prose-invert">
-        <section dangerouslySetInnerHTML={{ __html: post.content }}></section>
-      </article>
+
+      <Article content={post.content} />
     </>
   );
 }

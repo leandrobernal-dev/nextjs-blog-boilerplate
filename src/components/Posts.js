@@ -3,6 +3,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import { Calendar } from "lucide-react";
 import Link from "next/link";
 import getPosts from "@/utils/getPosts";
+import HTMLReactParser from "html-react-parser";
 
 const PostElements = ({ posts }) => {
   return (
@@ -19,11 +20,9 @@ const PostElements = ({ posts }) => {
               month: "long",
               day: "2-digit",
               year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
             })}
           </p>
-          <div dangerouslySetInnerHTML={{ __html: post.excerpt }}></div>
+          <div>{HTMLReactParser(post.excerpt)}</div>
         </li>
       ))}
     </ul>
