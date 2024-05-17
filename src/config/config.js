@@ -9,10 +9,10 @@ export const SITE = {
 };
 
 export const SOCIALS = [
-  {
-    name: "Github",
-    href: "https://github.com/leandrobernal-dev",
-    linkTitle: `${SITE.title} on Github`,
-    icon: <Github />,
-  },
+  // {
+  //   name: "Github",
+  //   href: "https://github.com/leandrobernal-dev",
+  //   linkTitle: `${SITE.title} on Github`,
+  //   icon: <Github />,
+  // },
 ];

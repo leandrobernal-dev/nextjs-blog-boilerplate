@@ -4,7 +4,7 @@ import HTMLReactParser from "html-react-parser";
 
 export default function Article({ content }) {
   return (
-    <article className="prose max-w-none prose-pre:prose-slate dark:prose-invert prose-code:text-orange-500 ">
+    <article className="prose max-w-none prose-pre:prose-slate dark:prose-invert prose-code:text-orange-500 prose-img:rounded-lg prose-img:border prose-img:border-orange-500 ">
       {HTMLReactParser(content)}
     </article>
   );

@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
-import { Calendar } from "lucide-react";
 import { SITE } from "@/config/config";
 import getPosts from "@/utils/getPosts";
 import Article from "@/components/Article";
+import Tags from "@/components/Tags";
+import Header from "@/components/Header";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const slug = params.slug;
@@ -13,12 +14,19 @@ export async function generateMetadata({ params, searchParams }, parent) {
               title
               content
               excerpt
+              tags {
+                nodes {
+                  name
+                  id
+                }
+              }
             }
           }
         `,
   };
   const queryResult = await getPosts(query);
   const post = queryResult.post;
+  const tags = post.tags.nodes.map((tag) => tag.name);
 
   if (!post) {
     notFound();
@@ -27,6 +35,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
   return {
     title: post.title + " | " + SITE.title,
     description: String(post.excerpt).replace(/<\/?p>/g, ""),
+    keywords: tags,
   };
 }
 
@@ -39,6 +48,12 @@ export default async function BlogPage({ params }) {
               title
               content
               date
+              tags {
+                nodes {
+                  name
+                  id
+                }
+              }
             }
           }
         `,
@@ -49,19 +64,9 @@ export default async function BlogPage({ params }) {
 
   return (
     <>
-      <header>
-        <h1 className="mb-2 text-4xl font-black">{post.title}</h1>
-      </header>
-      <p className="mb-8 flex items-center gap-2 text-sm italic text-zinc-400">
-        <Calendar />{" "}
-        {new Date(post.date).toLocaleDateString("en-us", {
-          month: "long",
-          day: "2-digit",
-          year: "numeric",
-        })}
-      </p>
-
+      <Header post={post} />
       <Article content={post.content} />
+      <Tags tags={post.tags.nodes} />
     </>
   );
 }

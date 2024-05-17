@@ -21,15 +21,13 @@ export default function Home() {
         </p>
 
         <div>
-          {SOCIALS.length > 0 ? (
+          {SOCIALS.length > 0 && (
             <p>
               <span className="">Social Links:</span>
               <span className="flex justify-start gap-2 ">
                 <SocialLinks />
               </span>
             </p>
-          ) : (
-            ""
           )}
         </div>
       </section>
