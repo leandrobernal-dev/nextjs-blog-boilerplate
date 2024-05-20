@@ -22,12 +22,10 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning={true}
         className={`${space_grotesk.className} flex justify-center overflow-y-scroll text-base dark:bg-black dark:text-white`}
       >
-        <div className="mx-4 flex min-h-screen w-[95%] max-w-5xl flex-col">
+        <div className="mx-4 flex min-h-screen w-[85%] max-w-5xl flex-col">
           <ContextProvider>
-            <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
-              <Nav />
-              {children}
-            </section>
+            <Nav />
+            {children}
             <Footer />
           </ContextProvider>
         </div>
