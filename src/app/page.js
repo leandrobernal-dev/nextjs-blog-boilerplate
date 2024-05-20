@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { PostSkeleton } from "@/components/PostSkeleton";
 import Posts from "@/components/Posts";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -24,6 +25,15 @@ export default function Home() {
             <Posts category={"all"} />
           </Suspense>
         </section>
+      </div>
+      <div class="flex justify-end text-base font-medium leading-6">
+        <Link
+          class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="All posts"
+          href="/posts"
+        >
+          All Posts →
+        </Link>
       </div>
     </main>
   );
