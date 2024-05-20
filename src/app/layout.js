@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning={true}
         className={`${ibmMono.className} flex justify-center overflow-y-scroll text-base dark:bg-black dark:text-white`}
       >
-        <div className="mx-4 flex min-h-screen w-[95%] max-w-3xl flex-col">
+        <div className="mx-4 flex min-h-screen w-[95%] max-w-5xl flex-col">
           <ContextProvider>
             <Nav />
             <main className="flex-grow pb-8">{children}</main>
