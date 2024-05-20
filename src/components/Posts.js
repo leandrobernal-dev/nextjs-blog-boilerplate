@@ -1,28 +1,68 @@
 import { unstable_noStore as noStore } from "next/cache";
 
-import { Calendar } from "lucide-react";
-import Link from "next/link";
 import getPosts from "@/utils/getPosts";
+import Link from "next/link";
 import HTMLReactParser from "html-react-parser";
 
 const PostElements = ({ posts }) => {
+  console.log(posts);
   return (
-    <ul className="flex flex-col gap-8">
+    <ul className="divide-y divide-gray-200 dark:divide-gray-700">
       {posts.map((post) => (
-        <li className="flex flex-col gap-2" key={"featured" + post.id}>
-          <Link href={`/posts/${post.slug}`}>
-            <h2 className="text-xl text-orange-500">{post.title}</h2>
-          </Link>
-          <p className="flex items-center gap-2 text-sm italic text-zinc-400">
-            <Calendar />
-
-            {new Date(post.date).toLocaleDateString("en-us", {
-              month: "long",
-              day: "2-digit",
-              year: "numeric",
-            })}
-          </p>
-          <div>{HTMLReactParser(post.excerpt)}</div>
+        <li className="py-12">
+          <article>
+            <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+              <dl>
+                <dt className="sr-only">Published on</dt>
+                <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString("en-us", {
+                      month: "long",
+                      day: "2-digit",
+                      year: "numeric",
+                    })}
+                  </time>
+                </dd>
+              </dl>
+              <div className="space-y-5 xl:col-span-3">
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                      <a
+                        className="text-gray-900 dark:text-gray-100"
+                        href="/blog/release-of-tailwind-nextjs-starter-blog-v2.0"
+                      >
+                        {post.title}
+                      </a>
+                    </h2>
+                    <div className="flex flex-wrap">
+                      {post.tags.nodes.map((tag) => (
+                        <Link
+                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
+                          href={"/tags/" + tag.name}
+                          key={tag.id}
+                        >
+                          {tag.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                    <div>{HTMLReactParser(post.excerpt)}</div>
+                  </div>
+                </div>
+                <div className="text-base font-medium leading-6">
+                  <a
+                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    aria-label='Read more: "Release of Tailwind Nextjs Starter Blog v2.0"'
+                    href="/blog/release-of-tailwind-nextjs-starter-blog-v2.0"
+                  >
+                    Read more →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
         </li>
       ))}
     </ul>
@@ -41,7 +81,7 @@ export default async function Posts({ category, searchQuery }) {
     query = {
       query: `
             {
-              posts(where: {search: "${searchQuery}", categoryName: "posts"})  {
+              posts(where: {search: "${searchQuery}"})  {
                 nodes {
                   id
                   slug
@@ -67,62 +107,28 @@ export default async function Posts({ category, searchQuery }) {
     );
   }
 
-  switch (category) {
-    case "all":
-      query = {
-        query: `
-              {
-                posts(where: {categoryName: "posts"}) {
+  query = {
+    query: `
+          {
+            posts(first: 5) {
+              nodes {
+                id
+                slug
+                title
+                date
+                excerpt
+                tags {
                   nodes {
                     id
-                    slug
-                    title
-                    date
-                    excerpt
+                    name
                   }
                 }
               }
-            `,
-      };
-      break;
-    case "featured":
-      query = {
-        query: `
-              {
-                posts(where: {categoryName: "featured"}) {
-                  nodes {
-                    id
-                    slug
-                    title
-                    date
-                    excerpt
-                  }
-                }
-              }
-            `,
-      };
-      break;
-    case "recent":
-      query = {
-        query: `
-              {
-                posts(where: {categoryName: "posts", dateQuery: {month: ${
-                  new Date().getMonth() + 1
-                }, year: ${new Date().getFullYear()}}}) {
-                  nodes {
-                    id
-                    slug
-                    title
-                    date
-                    excerpt
-                  }
-                }
-              }
-            `,
-      };
-
-      break;
-  }
+            }
+          }
+    
+        `,
+  };
 
   let result = await getPosts(query);
   posts = result.posts.nodes;
