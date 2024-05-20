@@ -2,7 +2,7 @@
 
 import { SITE } from "@/config/config";
 import Link from "next/link";
-import { SunMoon, Menu, X, Moon, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { useState } from "react";
 
 export default function Nav() {
@@ -15,7 +15,7 @@ export default function Nav() {
 
   return (
     <header>
-      <div className="relative my-8 border-b border-orange-500 pb-8 sm:flex sm:justify-between">
+      <div className="relative my-10 pb-8 sm:flex sm:justify-between">
         <span className="text-2xl">
           <Link href="/">{SITE.logo}</Link>
         </span>
@@ -44,16 +44,6 @@ export default function Nav() {
                 </Link>
               </li>
             ))}
-
-            <li className="flex items-center hover:text-orange-500">
-              <button
-                onClick={() =>
-                  document.querySelector("html").classList.toggle("dark")
-                }
-              >
-                <SunMoon className="hover:rotate-12" />
-              </button>
-            </li>
           </ul>
         </nav>
       </div>
