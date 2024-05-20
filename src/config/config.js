@@ -6,6 +6,7 @@ export const SITE = {
   description: "Software Development and Tech Blogs",
   title: "Leandro Bernal",
   logo: `Leandro Bernal`,
+  postPerPage: 5,
 };
 
 export const SOCIALS = [
