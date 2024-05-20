@@ -27,12 +27,12 @@ const PostElements = ({ posts }) => {
                 <div className="space-y-6">
                   <div>
                     <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                      <a
+                      <Link
                         className="text-gray-900 dark:text-gray-100"
                         href="/blog/release-of-tailwind-nextjs-starter-blog-v2.0"
                       >
                         {post.title}
-                      </a>
+                      </Link>
                     </h2>
                     <div className="flex flex-wrap">
                       {post.tags.nodes.map((tag) => (
@@ -68,7 +68,7 @@ const PostElements = ({ posts }) => {
   );
 };
 
-export default async function Posts({ category, searchQuery }) {
+export default async function Posts({ category, searchQuery, page }) {
   noStore();
 
   // await new Promise((resolve) => setTimeout(resolve, 30000)); // Simulate slow data fetching
