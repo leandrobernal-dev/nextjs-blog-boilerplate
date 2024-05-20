@@ -5,7 +5,6 @@ import Link from "next/link";
 import HTMLReactParser from "html-react-parser";
 
 const PostElements = ({ posts }) => {
-  console.log(posts);
   return (
     <ul className="divide-y divide-gray-200 dark:divide-gray-700">
       {posts.map((post) => (
@@ -52,13 +51,13 @@ const PostElements = ({ posts }) => {
                   </div>
                 </div>
                 <div className="text-base font-medium leading-6">
-                  <a
+                  <Link
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label='Read more: "Release of Tailwind Nextjs Starter Blog v2.0"'
-                    href="/blog/release-of-tailwind-nextjs-starter-blog-v2.0"
+                    aria-label={post.title}
+                    href={"/posts/" + post.slug}
                   >
                     Read more →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
