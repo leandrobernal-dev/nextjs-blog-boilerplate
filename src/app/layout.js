@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark">
       <body
         suppressHydrationWarning={true}
-        className={`${space_grotesk.className} flex justify-center overflow-y-scroll text-base dark:bg-black dark:text-white`}
+        className={`${space_grotesk.className} flex justify-center overflow-y-scroll bg-white pl-[calc(100vw-100%)] text-base text-black antialiased dark:bg-gray-950 dark:text-white`}
       >
         <div className="mx-4 flex min-h-screen w-[85%] max-w-5xl flex-col">
           <ContextProvider>
