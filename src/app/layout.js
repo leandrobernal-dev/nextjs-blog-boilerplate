@@ -1,10 +1,8 @@
-import { IBM_Plex_Mono, Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-const ibmMono = IBM_Plex_Mono({
+const space_grotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
 
 import { SITE } from "@/config/config";
@@ -22,12 +20,14 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark">
       <body
         suppressHydrationWarning={true}
-        className={`${ibmMono.className} flex justify-center overflow-y-scroll text-base dark:bg-black dark:text-white`}
+        className={`${space_grotesk.className} flex justify-center overflow-y-scroll text-base dark:bg-black dark:text-white`}
       >
         <div className="mx-4 flex min-h-screen w-[95%] max-w-5xl flex-col">
           <ContextProvider>
-            <Nav />
-            <main className="flex-grow pb-8">{children}</main>
+            <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
+              <Nav />
+              {children}
+            </section>
             <Footer />
           </ContextProvider>
         </div>
