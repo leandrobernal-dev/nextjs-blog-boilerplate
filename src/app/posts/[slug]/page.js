@@ -4,6 +4,7 @@ import getPosts from "@/utils/getPosts";
 import Article from "@/components/Article";
 import Tags from "@/components/Tags";
 import Header from "@/components/Header";
+import getPost from "@/utils/getPosts";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const slug = params.slug;
@@ -61,7 +62,7 @@ export default async function BlogPage({ params }) {
         `,
   };
 
-  const queryResult = await getPosts(query);
+  const queryResult = await getPost(query);
   const post = queryResult.post;
 
   return (

@@ -32,7 +32,7 @@ export const PostElements = ({ posts, paginate, totalPostCount, page = 1 }) => {
                       <h2 className="text-2xl font-bold leading-8 tracking-tight">
                         <Link
                           className="text-gray-900 dark:text-gray-100"
-                          href="/blog/release-of-tailwind-nextjs-starter-blog-v2.0"
+                          href={"/posts/" + post.slug}
                         >
                           {post.title}
                         </Link>
