@@ -40,7 +40,7 @@ const PostElements = ({ posts, paginate, totalPostCount, page }) => {
                       <div className="flex flex-wrap">
                         {post.tags.nodes.map((tag) => (
                           <Link
-                            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mr-3 text-sm font-medium uppercase"
+                            className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             href={"/tags/" + tag.name}
                             key={tag.id}
                           >
@@ -127,6 +127,12 @@ export default async function Posts({
                   title
                   date
                   excerpt
+                  tags {
+                    nodes {
+                      id
+                      name
+                    }
+                  }
                 }
               }
             }
@@ -148,7 +154,6 @@ export default async function Posts({
 
   posts = await getPosts(page);
   const totalPostCount = await getTotalPostsCount();
-  console.log(totalPostCount);
 
   return (
     <PostElements
