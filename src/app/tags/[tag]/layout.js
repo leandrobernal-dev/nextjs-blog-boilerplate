@@ -1,30 +1,6 @@
-import { PostElements } from "@/components/Posts";
-import getPost, { getAllTags } from "@/utils/getPosts";
 import Link from "next/link";
 
 export default async function TagPage({ params, children }) {
-  const query = {
-    query: `
-          {
-            posts(where: {tagSlugIn: "${params.tag}"})  {
-              nodes {
-                id
-                slug
-                title
-                date
-                excerpt
-                tags {
-                  nodes {
-                    id
-                    name
-                    slug
-                  }
-                }
-              }
-            }
-          }
-        `,
-  };
   const tags = await getAllTags();
 
   return (
