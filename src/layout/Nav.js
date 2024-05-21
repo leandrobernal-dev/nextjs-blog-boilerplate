@@ -9,6 +9,7 @@ export default function Nav() {
   const navLinks = [
     { name: "Posts", href: "/posts" },
     { name: "About", href: "/about" },
+    { name: "Tags", href: "/tags" },
     { name: "Search", href: "/search", icon: <Search />, useIcon: true },
   ];
   const [open, setOpen] = useState(false);
