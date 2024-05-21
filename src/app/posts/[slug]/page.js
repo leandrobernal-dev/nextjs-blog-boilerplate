@@ -65,10 +65,10 @@ export default async function BlogPage({ params }) {
   const post = queryResult.post;
 
   return (
-    <>
+    <main className="mb-auto">
       <Header post={post} />
       <Article content={post.content} />
       <Tags tags={post.tags.nodes} />
-    </>
+    </main>
   );
 }
