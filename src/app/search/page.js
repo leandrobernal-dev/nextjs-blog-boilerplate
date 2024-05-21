@@ -7,7 +7,7 @@ export default function SearchPage(req) {
   const searchQuery = req.searchParams.q || "";
 
   return (
-    <div>
+    <main className="mb-auto">
       <h1 className="pb-8 text-2xl">Search</h1>
       <Search searchQuery={searchQuery}>
         {searchQuery.length > 1 && (
@@ -16,6 +16,6 @@ export default function SearchPage(req) {
           </Suspense>
         )}
       </Search>
-    </div>
+    </main>
   );
 }

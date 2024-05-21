@@ -11,10 +11,12 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
 export default async function AboutPage() {
   return (
-    <article>
-      <Suspense fallback={<PostSkeleton />}>
-        <About />
-      </Suspense>
-    </article>
+    <main className="mb-auto">
+      <article>
+        <Suspense fallback={<PostSkeleton />}>
+          <About />
+        </Suspense>
+      </article>
+    </main>
   );
 }
