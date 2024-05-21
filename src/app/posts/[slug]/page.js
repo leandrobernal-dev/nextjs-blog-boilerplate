@@ -18,6 +18,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
                 nodes {
                   name
                   id
+                  slug
                 }
               }
             }
@@ -52,6 +53,7 @@ export default async function BlogPage({ params }) {
                 nodes {
                   name
                   id
+                  slug
                 }
               }
             }
