@@ -1,3 +1,4 @@
+import { getAllTags } from "@/utils/getPosts";
 import Link from "next/link";
 
 export default async function TagPage({ params, children }) {
