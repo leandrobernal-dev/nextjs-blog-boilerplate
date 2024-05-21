@@ -19,7 +19,7 @@ export default function Search({ children, searchQuery }) {
           }
           defaultValue={searchQuery}
           placeholder="Search..."
-          className="w-full rounded-md border-none bg-transparent p-4 outline-none outline-orange-500 focus:outline-orange-500 active:outline-orange-500"
+          className="w-full rounded-sm border border-b border-none border-b-primary-500 bg-gray-900 p-4 shadow-lg shadow-black outline-none "
         />
       </div>
       {children}
