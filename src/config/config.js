@@ -1,7 +1,7 @@
 import { Github } from "lucide-react";
 
 export const SITE = {
-  website: "https://blog.leiisme.com/",
+  website: "https://bernalleandro.com/",
   author: "Leandro Bernal",
   description: "Software Development and Tech Blogs",
   title: "Leandro Bernal",

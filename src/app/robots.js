@@ -1,3 +1,5 @@
+import { SITE } from "@/config/config";
+
 export default function robots() {
   return {
     rules: [
@@ -5,7 +7,7 @@ export default function robots() {
         userAgent: "*",
       },
     ],
-    sitemap: "https://blog.leiisme.com/sitemap.xml",
-    host: "https://blog.leiisme.com",
+    sitemap: SITE.website + "sitemap.xml",
+    host: SITE.website,
   };
 }
