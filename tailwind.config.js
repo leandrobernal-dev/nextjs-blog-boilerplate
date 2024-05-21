@@ -51,6 +51,12 @@ module.exports = {
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
+            "ul > li::marker": {
+              color: theme("colors.primary.500"),
+            },
+            "ol > li::marker": {
+              color: theme("colors.primary.500"),
+            },
             a: {
               color: theme("colors.primary.500"),
               "&:hover": {
