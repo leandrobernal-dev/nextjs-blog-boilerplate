@@ -5,7 +5,7 @@ import HTMLReactParser from "html-react-parser";
 import getPost, { getPosts, getTotalPostsCount } from "@/utils/getPosts";
 import { SITE } from "@/config/config";
 
-const PostElements = ({ posts, paginate, totalPostCount, page }) => {
+export const PostElements = ({ posts, paginate, totalPostCount, page = 1 }) => {
   const totalPages = Math.ceil(totalPostCount / SITE.postPerPage);
   return (
     <div>
@@ -41,7 +41,7 @@ const PostElements = ({ posts, paginate, totalPostCount, page }) => {
                         {post.tags.nodes.map((tag) => (
                           <Link
                             className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            href={"/tags/" + tag.name}
+                            href={"/tags/" + tag.slug}
                             key={tag.id}
                           >
                             {tag.name}
@@ -131,6 +131,7 @@ export default async function Posts({
                     nodes {
                       id
                       name
+                      slug
                     }
                   }
                 }
