@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { SITE } from "@/config/config";
-import getPosts from "@/utils/getPosts";
+import getPosts, { getAllTags } from "@/utils/getPosts";
 
 export default async function sitemap() {
   const query = {
@@ -19,16 +19,21 @@ export default async function sitemap() {
   };
   const postResult = await getPosts(query);
   const posts = postResult.posts.nodes;
+  const allTags = await getAllTags();
 
   let blogPosts = posts.map((post) => ({
     url: `${SITE.website}${post.slug}`,
     lastModified: new Date(post.date).toISOString().split("T")[0],
   }));
 
-  let routes = ["", "posts", "search", "about"].map((route) => ({
+  let routes = ["", "posts", "search", "about", "tags"].map((route) => ({
     url: `${SITE.website}${route}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
-  return [...routes, ...blogPosts];
+  let tags = allTags.map((tag) => ({
+    url: `${SITE.website}tags/${tag.slug}`,
+  }));
+
+  return [...routes, ...blogPosts, ...tags];
 }
