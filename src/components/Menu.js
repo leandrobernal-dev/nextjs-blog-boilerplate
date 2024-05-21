@@ -20,7 +20,7 @@ export function NavMenu({ navLinks }) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="icon"
-          className="border-none bg-transparent outline-none focus:outline-none sm:hidden"
+          className="border-none bg-transparent p-0 outline-none focus:outline-none sm:hidden"
         >
           {open ? <X /> : <Menu />}
         </Button>
