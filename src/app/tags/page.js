@@ -1,7 +1,9 @@
 import { getAllTags } from "@/utils/getPosts";
+import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 
 export default async function TagsPage() {
+  noStore();
   const tags = await getAllTags();
   return (
     <main className="mb-auto">
