@@ -29,6 +29,7 @@ export async function getPosts(page = 1) {
                 nodes {
                   id
                   name
+                  slug
                 }
               }
             }
@@ -72,6 +73,7 @@ export async function getPosts(page = 1) {
               nodes {
                 id
                 name
+                slug
               }
             }
           }
@@ -120,4 +122,26 @@ export async function getTotalPostsCount() {
     .then(({ data }) => data.data.posts);
 
   return result.nodes.length;
+}
+
+export async function getAllTags() {
+  const allTags = await axios
+    .post(
+      process.env.GRAPHQL_URI,
+      {
+        query: `query GetAllTags {
+        tags {
+          nodes {
+            count
+            id
+            slug
+          }
+        }
+      }`,
+      },
+      headers,
+    )
+    .then(({ data }) => data.data.tags.nodes);
+
+  return allTags;
 }
