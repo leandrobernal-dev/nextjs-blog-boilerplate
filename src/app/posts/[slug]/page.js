@@ -48,6 +48,7 @@ export default async function BlogPage({ params }) {
     query: `
           {
             post(id: "/${slug}", idType: SLUG) {
+              id
               title
               content
               date
@@ -58,6 +59,14 @@ export default async function BlogPage({ params }) {
                   slug
                 }
               }
+              previous {
+                slug
+                title
+              }
+              next {
+                slug
+                title
+              }
             }
           }
         `,
@@ -65,7 +74,6 @@ export default async function BlogPage({ params }) {
 
   const queryResult = await getPost(query);
   const post = queryResult.post;
-
   return (
     <main className="mb-auto">
       <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
@@ -143,16 +151,31 @@ export default async function BlogPage({ params }) {
                     </div>
                   </div>
                   <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    <div>
-                      <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                        Previous Article
-                      </h2>
-                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        <a href="/blog/new-features-in-v1">
-                          New features in v1
-                        </a>
+                    {post.previous && (
+                      <div>
+                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                          Previous Article
+                        </h2>
+                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                          <a href={"/posts/" + post.previous.slug}>
+                            {post.previous.title}
+                          </a>
+                        </div>
                       </div>
-                    </div>
+                    )}
+
+                    {post.next && (
+                      <div>
+                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                          Next Article
+                        </h2>
+                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                          <a href={"/posts/" + post.next.slug}>
+                            {post.next.title}
+                          </a>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="pt-4 xl:pt-8">
