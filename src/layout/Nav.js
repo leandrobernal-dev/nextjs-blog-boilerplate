@@ -17,7 +17,7 @@ export default function Nav() {
     <header>
       <div className="relative flex items-center justify-between py-10 pb-8 sm:flex sm:justify-between">
         <span className="text-2xl font-black">
-          <Link href="/">{SITE.logo}</Link>
+          <a href="/">{SITE.logo}</a>
         </span>
 
         <nav className="flex justify-center">
@@ -26,9 +26,7 @@ export default function Nav() {
           <ul className={`hidden items-center gap-4 sm:flex`}>
             {navLinks.map((link) => (
               <li key={link.href} className="hover:text-primary-500">
-                <Link href={link.href}>
-                  {link.useIcon ? link.icon : link.name}
-                </Link>
+                <a href={link.href}>{link.useIcon ? link.icon : link.name}</a>
               </li>
             ))}
           </ul>

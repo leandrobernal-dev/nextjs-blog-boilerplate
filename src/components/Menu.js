@@ -33,12 +33,12 @@ export function NavMenu({ navLinks }) {
               className="p-0"
               onClick={() => setOpen(false)}
             >
-              <Link
+              <a
                 href={link.href}
                 className="h-full w-full p-3 hover:text-primary-500"
               >
                 {link.useIcon ? link.icon : link.name}
-              </Link>
+              </a>
             </DropdownMenuItem>
           ))}
         </DropdownMenuGroup>

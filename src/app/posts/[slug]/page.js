@@ -132,13 +132,13 @@ export default async function BlogPage({ params }) {
                     </h2>
                     <div className="flex flex-wrap">
                       {post.tags.nodes.map((tag) => (
-                        <Link
+                        <a
                           key={tag.id}
                           className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           href={"/tags/" + tag.slug}
                         >
                           {tag.name}
-                        </Link>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -148,21 +148,21 @@ export default async function BlogPage({ params }) {
                         Previous Article
                       </h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        <Link href="/blog/new-features-in-v1">
+                        <a href="/blog/new-features-in-v1">
                           New features in v1
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="pt-4 xl:pt-8">
-                  <Link
+                  <a
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                     aria-label="Back to the posts"
                     href="/posts"
                   >
                     ← Back to the posts
-                  </Link>
+                  </a>
                 </div>
               </footer>
             </div>

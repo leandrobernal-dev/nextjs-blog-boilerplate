@@ -10,12 +10,12 @@ export default async function Posts({ params }) {
       <div className="flex sm:space-x-24">
         <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md dark:bg-gray-900/70 dark:shadow-gray-800/40 sm:flex">
           <div className="px-6 py-4">
-            <Link
+            <a
               className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-primary-500 dark:hover:text-primary-500"
               href="/posts"
             >
               All Posts
-            </Link>
+            </a>
             <Suspense
               fallback={
                 <div className="m-4 grid h-24 w-full grid-rows-3 gap-2">

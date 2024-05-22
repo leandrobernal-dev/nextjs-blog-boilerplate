@@ -6,13 +6,13 @@ export default function Tags({ tags }) {
       <h4 className="font-medium">Tags:</h4>
       <div className="flex gap-1 text-orange-500">
         {tags.map((tag) => (
-          <Link
+          <a
             className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             href={"/tags/" + tag.slug}
             key={tag.id}
           >
             {tag.name}
-          </Link>
+          </a>
         ))}
       </div>
     </section>

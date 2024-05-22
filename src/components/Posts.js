@@ -30,22 +30,22 @@ export const PostElements = ({ posts, paginate, totalPostCount, page = 1 }) => {
                   <div className="space-y-6">
                     <div>
                       <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                        <Link
+                        <a
                           className="text-gray-900 dark:text-gray-100"
                           href={"/posts/" + post.slug}
                         >
                           {post.title}
-                        </Link>
+                        </a>
                       </h2>
                       <div className="flex flex-wrap">
                         {post.tags.nodes.map((tag) => (
-                          <Link
+                          <a
                             className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             href={"/tags/" + tag.slug}
                             key={tag.id}
                           >
                             {tag.name}
-                          </Link>
+                          </a>
                         ))}
                       </div>
                     </div>
@@ -54,13 +54,13 @@ export const PostElements = ({ posts, paginate, totalPostCount, page = 1 }) => {
                     </div>
                   </div>
                   <div className="text-base font-medium leading-6">
-                    <Link
+                    <a
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                       aria-label={post.title}
                       href={"/posts/" + post.slug}
                     >
                       Read more →
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -71,7 +71,7 @@ export const PostElements = ({ posts, paginate, totalPostCount, page = 1 }) => {
       {paginate && (
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <nav className="flex justify-between">
-            <Link
+            <a
               rel="next"
               href={`/posts/page/${Number(page) - 1}`}
               className={
@@ -81,12 +81,12 @@ export const PostElements = ({ posts, paginate, totalPostCount, page = 1 }) => {
               }
             >
               Previous
-            </Link>
+            </a>
             <span>
               {page}{" "}
               {totalPostCount > SITE.postPerPage ? "of " + totalPages : ""}
             </span>
-            <Link
+            <a
               rel="next"
               href={`/posts/page/${Number(page) + 1}`}
               className={
@@ -96,7 +96,7 @@ export const PostElements = ({ posts, paginate, totalPostCount, page = 1 }) => {
               }
             >
               Next
-            </Link>
+            </a>
           </nav>
         </div>
       )}

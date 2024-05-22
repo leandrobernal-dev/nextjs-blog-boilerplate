@@ -15,13 +15,13 @@ export default async function TagsComponent({ params }) {
           </li>
         ) : (
           <li className="my-3" key={tag.id}>
-            <Link
+            <a
               className="px-3 py-2 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
               aria-label="View posts tagged guide"
               href={"/tags/" + tag.slug}
             >
               {`${tag.slug}(${tag.count})`}
-            </Link>
+            </a>
           </li>
         );
       })}

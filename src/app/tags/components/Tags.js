@@ -8,7 +8,7 @@ export default async function Tags() {
   return (
     <>
       {tags.map((tag) => (
-        <Link
+        <a
           className="mb-2 mr-5 mt-2"
           href={`/tags/${tag.slug}`}
           key={"tags-" + tag.id}
@@ -23,7 +23,7 @@ export default async function Tags() {
             {" "}
             ({tag.count})
           </span>
-        </Link>
+        </a>
       ))}
     </>
   );
