@@ -59,7 +59,7 @@ export default async function AboutPage() {
                 className="text-sm text-gray-500 transition hover:text-gray-600"
                 target="_blank"
                 rel="noopener noreferrer"
-                href={SITE.github}
+                href={process.env.GITHUB_URL}
               >
                 <span className="sr-only">github</span>
                 <svg

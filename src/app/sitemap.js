@@ -22,17 +22,17 @@ export default async function sitemap() {
   const allTags = await getAllTags();
 
   let blogPosts = posts.map((post) => ({
-    url: `${SITE.website}${post.slug}`,
+    url: `${process.env.DOMAIN_NAME}${post.slug}`,
     lastModified: new Date(post.date).toISOString().split("T")[0],
   }));
 
   let routes = ["", "posts", "search", "about", "tags"].map((route) => ({
-    url: `${SITE.website}${route}`,
+    url: `${process.env.DOMAIN_NAME}${route}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
   let tags = allTags.map((tag) => ({
-    url: `${SITE.website}tags/${tag.slug}`,
+    url: `${process.env.DOMAIN_NAME}tags/${tag.slug}`,
   }));
 
   return [...routes, ...blogPosts, ...tags];
