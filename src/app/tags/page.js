@@ -1,6 +1,13 @@
+import { SITE } from "@/config/config";
 import { getAllTags } from "@/utils/getPosts";
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
+
+export async function generateMetadata() {
+  return {
+    title: "Tags | " + SITE.title,
+  };
+}
 
 export default async function TagsPage() {
   noStore();
