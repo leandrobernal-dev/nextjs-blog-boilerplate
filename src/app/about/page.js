@@ -42,7 +42,7 @@ export default async function AboutPage() {
                 className="text-sm text-gray-500 transition hover:text-gray-600"
                 target="_blank"
                 rel="noopener noreferrer"
-                href="mailto:address@yoursite.com"
+                href={process.env.EMAIL}
               >
                 <span className="sr-only">mail</span>
                 <svg

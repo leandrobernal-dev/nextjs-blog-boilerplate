@@ -7,7 +7,7 @@ export default function robots() {
         userAgent: "*",
       },
     ],
-    sitemap: SITE.website + "sitemap.xml",
-    host: SITE.website,
+    sitemap: process.env.DOMAIN_NAME + "sitemap.xml",
+    host: process.env.DOMAIN_NAME,
   };
 }
