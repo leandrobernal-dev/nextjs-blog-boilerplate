@@ -1,17 +1,8 @@
-import { SITE } from "@/config/config";
-import { getAllTags } from "@/utils/getPosts";
-import { unstable_noStore as noStore } from "next/cache";
-import Link from "next/link";
-
-export async function generateMetadata() {
-  return {
-    title: "Tags | " + SITE.title,
-  };
-}
+import Tags from "@/app/tags/components/Tags";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Suspense } from "react";
 
 export default async function TagsPage() {
-  noStore();
-  const tags = await getAllTags();
   return (
     <main className="mb-auto">
       <div className="flex flex-col items-start justify-start divide-y divide-gray-200 dark:divide-gray-700 md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6 md:divide-y-0">
@@ -21,24 +12,17 @@ export default async function TagsPage() {
           </h1>
         </div>
         <div className="flex max-w-lg flex-wrap">
-          {tags.map((tag) => (
-            <Link
-              className="mb-2 mr-5 mt-2"
-              href={`/tags/${tag.slug}`}
-              key={"tags-" + tag.id}
-            >
-              <span className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                {tag.slug}
-              </span>
-              <span
-                className="-ml-2 text-sm font-semibold uppercase text-gray-600 dark:text-gray-300"
-                aria-label="View posts tagged next-js"
-              >
-                {" "}
-                ({tag.count})
-              </span>
-            </Link>
-          ))}
+          <Suspense
+            fallback={
+              <div className="m-4 grid h-5 w-32 grid-cols-3 gap-2">
+                <Skeleton className="h-full w-full" />
+                <Skeleton className="h-full w-full" />
+                <Skeleton className="h-full w-full" />
+              </div>
+            }
+          >
+            <Tags />
+          </Suspense>
         </div>
       </div>
     </main>
