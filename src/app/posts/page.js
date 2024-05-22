@@ -1,11 +1,10 @@
-import PostsPage from "@/app/posts/page/components/PostsPage";
-
-import { getAllTags } from "@/utils/getPosts";
+import TagsComponent from "@/app/posts/TagsComponent";
+import PostsPage from "@/app/posts/components/PostsPage";
+import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default async function PostPage({ params }) {
-  const tags = await getAllTags();
-
+export default async function Posts({ params }) {
   return (
     <main className="mb-auto">
       <div className="flex sm:space-x-24">
@@ -17,27 +16,17 @@ export default async function PostPage({ params }) {
             >
               All Posts
             </Link>
-            <ul>
-              {tags.map((tag) => {
-                return tag.slug === params.tag ? (
-                  <li className="my-3" key={tag.id}>
-                    <h3 className="inline px-3 py-2 text-sm font-bold uppercase text-primary-500">
-                      {`${tag.slug}(${tag.count})`}
-                    </h3>
-                  </li>
-                ) : (
-                  <li className="my-3" key={tag.id}>
-                    <Link
-                      className="px-3 py-2 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
-                      aria-label="View posts tagged guide"
-                      href={"/tags/" + tag.slug}
-                    >
-                      {`${tag.slug}(${tag.count})`}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+            <Suspense
+              fallback={
+                <div className="m-4 grid h-24 w-full grid-rows-3 gap-2">
+                  <Skeleton className="h-full w-full" />
+                  <Skeleton className="h-full w-full" />
+                  <Skeleton className="h-full w-full" />
+                </div>
+              }
+            >
+              <TagsComponent params={params} />
+            </Suspense>
           </div>
         </div>
         <PostsPage />
