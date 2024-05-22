@@ -22,7 +22,7 @@ export default async function sitemap() {
   const allTags = await getAllTags();
 
   let blogPosts = posts.map((post) => ({
-    url: `${process.env.DOMAIN_NAME}${post.slug}`,
+    url: `${process.env.DOMAIN_NAME}posts/${post.slug}`,
     lastModified: new Date(post.date).toISOString().split("T")[0],
   }));
 
