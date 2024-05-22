@@ -2,7 +2,6 @@ import { SITE } from "@/config/config";
 import Link from "next/link";
 
 export default function Footer() {
-  console.log(process.env.EMAIL);
   return (
     <div className="mt-16 flex flex-col items-center">
       <div className="mb-3 flex space-x-4">

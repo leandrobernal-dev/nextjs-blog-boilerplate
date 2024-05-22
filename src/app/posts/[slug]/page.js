@@ -65,7 +65,6 @@ export default async function BlogPage({ params }) {
 
   const queryResult = await getPost(query);
   const post = queryResult.post;
-  console.log(post);
 
   return (
     <main className="mb-auto">
