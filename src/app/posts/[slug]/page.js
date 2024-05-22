@@ -2,10 +2,7 @@ import { notFound } from "next/navigation";
 import { SITE } from "@/config/config";
 import getPosts from "@/utils/getPosts";
 import Article from "@/components/Article";
-import Tags from "@/components/Tags";
-import Header from "@/components/Header";
 import getPost from "@/utils/getPosts";
-import Link from "next/link";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const slug = params.slug;
@@ -29,12 +26,12 @@ export async function generateMetadata({ params, searchParams }, parent) {
   };
   const queryResult = await getPosts(query);
   const post = queryResult.post;
-  const tags = post.tags.nodes.map((tag) => tag.name);
 
   if (!post) {
     notFound();
   }
 
+  const tags = post.tags.nodes.map((tag) => tag.name);
   return {
     title: post.title + " | " + SITE.title,
     description: String(post.excerpt).replace(/<\/?p>/g, ""),
