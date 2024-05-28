@@ -1,5 +1,6 @@
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const space_grotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -9,6 +10,7 @@ import { SITE } from "@/config/config";
 import Nav from "@/layout/Nav";
 import Footer from "@/layout/Footer";
 import ContextProvider from "@/context/UserDataContext";
+import GoogleAdsense from "@/components/GoogleAdsense";
 
 export const metadata = {
   title: SITE.title,
@@ -29,6 +31,8 @@ export default function RootLayout({ children }) {
             <Footer />
           </ContextProvider>
         </div>
+        <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_GTAG} />
+        <GoogleAdsense />
       </body>
     </html>
   );
