@@ -46,6 +46,7 @@ module.exports = {
       },
       colors: {
         primary: colors.pink,
+        accent: "#3AD0E7",
         gray: colors.gray,
       },
       typography: ({ theme }) => ({
